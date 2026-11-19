@@ -1,0 +1,12 @@
+{
+  "weights_confirmed": true,
+  "weights": {"tasks":0.35,"income":0.3,"growth":0.2,"work_style":0.15},
+  "options": [
+    {"name":"虚构Offer A", "hard_constraints":{"city":true,"salary_floor":true},
+     "scores":{"tasks":4,"income":3,"growth":4,"work_style":null},
+     "evidence":{"tasks":"JD覆盖用户做过的三类任务","income":"固定现金达到底线","growth":"有明确导师和项目机会"}},
+    {"name":"虚构Offer B", "hard_constraints":{"city":true,"salary_floor":false},
+     "scores":{"tasks":5,"income":2,"growth":5,"work_style":4},
+     "evidence":{"tasks":"任务偏好一致","income":"固定现金低于底线","growth":"有跨团队项目","work_style":"书面确认弹性时间"}}
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "职途八字 · 职业探索"
+  short_description: "结合八字探索、职业背景与实时岗位搜索，帮助比较职业方向并制定验证计划"
+  default_prompt: "使用 $bazi-career，结合我的职业背景、当前卡点和八字，搜索适配的职业方向与真实岗位。"
