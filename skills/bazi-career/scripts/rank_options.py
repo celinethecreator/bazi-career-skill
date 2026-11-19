@@ -6,16 +6,18 @@ import sys
 DIMENSIONS = {'tasks','skills','income','growth','stability','work_style','location'}
 
 def finite_number(x):
-    return type(x) in (int,float) and math.isfinite(x)
+    return type(x) is int or (type(x) is float and math.isfinite(x))
 
 def compare(data):
+    if not isinstance(data, dict):
+        raise ValueError('Input must be a JSON object')
     if set(data)-{'weights','options','weights_confirmed'}:
         raise ValueError('Unsupported fields')
     if data.get('weights_confirmed') is not True:
         raise ValueError('User-confirmed weights required')
     weights=data['weights']
-    if not weights or set(weights)-DIMENSIONS or any(
-        not finite_number(w) or w<=0 for w in weights.values()):
+    if not isinstance(weights, dict) or not weights or set(weights)-DIMENSIONS or any(
+        not finite_number(w) or not 0 < w <= 1 for w in weights.values()):
         raise ValueError('Use positive finite weights for practical dimensions only')
     if not math.isclose(sum(weights.values()),1,abs_tol=1e-8):
         raise ValueError('Weights must sum to 1')
@@ -35,9 +37,11 @@ def compare(data):
         if any(v is not None and type(v) is not bool for v in hard.values()):
             raise ValueError('Hard constraints must be true/false/null')
         scores=opt.get('scores',{})
-        if set(scores)-set(weights):
+        if not isinstance(scores, dict) or set(scores)-set(weights):
             raise ValueError('Scores must match selected dimensions')
         evidence=opt.get('evidence',{})
+        if not isinstance(evidence, dict):
+            raise ValueError('Evidence must be a JSON object')
         coverage=0; weighted=0; missing=[]
         for dim,w in weights.items():
             s=scores.get(dim)
