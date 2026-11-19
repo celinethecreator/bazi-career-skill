@@ -64,17 +64,13 @@ cp -R skills/bazi-career ~/.claude/skills/
 
 **其他工具**：有 Skill 导入功能时，选择整个 `skills/bazi-career` 文件夹。普通聊天可上传 `SKILL.md` 和 `references/` 下的文件，请助手按文件里的流程试用。
 
-### 云端聊天（DeepSeek 网页版 / App）
+### 云端聊天（DeepSeek / 豆包 / 千问 / Kimi 等）
 
-这条路径直接在云端对话里试用，无需终端、Python 或 API Key。官方资料确认 DeepSeek Chat 支持文件输入和联网搜索，目前未核实其普通聊天入口支持把第三方 Skill 持久安装到账号。
+1. 打开 [通用对话 TXT](cloud-chat.txt)，复制全部内容。
+2. 在你平时使用的 AI 网页或 App 新建对话，粘贴并发送。如果客户端接受 TXT 文件，也可以上传后发送「请按这份材料开始访谈」。
+3. 按助手的提问提供职业背景、卡点和已排好的四柱。实时岗位搜索取决于当前客户端是否能联网。
 
-1. 打开 [Skill 主文件](skills/bazi-career/SKILL.md) 和 [参考文件目录](skills/bazi-career/references/)。复制正文到同一个 DeepSeek 对话，或将这些正文合成 TXT 后上传。参考文件也要提供，因为对话未必能顺着相对路径读取仓库。
-2. 发送：**请按我提供的「职途八字」流程做职业咨询。每轮先问一个问题，结合我的四柱、工作经历和现实约束，再给出方向。**
-3. 直接填写已经排好的年、月、日、时四柱。需要找实时岗位时，开启联网搜索，并让助手附招聘原页和核验状态。如果无法核验，让它给搜索词或分析你贴的 JD。
-
-开新对话时重新提供材料。如果使用的是搭载 DeepSeek 的云端 Agent 平台，且该平台明确提供 Skill 导入功能，可以通过它的入口导入整个 `skills/bazi-career`，再按平台支持情况使用脚本及搜索。
-
-[DeepSeek 官方功能说明](https://api-docs.deepseek.com/zh-cn/updates/)
+这份 TXT 是为普通聊天准备的独立版本，不用安装 Python 或填写 API Key。新对话需重新提供文本。支持原生 Skill 导入的 Agent 平台可改用完整的 `skills/bazi-career` 文件夹。原生安装、排盘脚本、附件读取和联网能力以客户端为准。
 
 ### 3. 第一次使用
 
