@@ -28,27 +28,59 @@
 
 千问、DeepSeek 等可作为对话模型。能否一键安装、读附件、运行 Python 或联网，由具体使用的客户端或 Agent 平台决定。普通聊天入口可按上表手动试用。独立网页若要提供实时 AI 对话和岗位搜索，需另外配置推理与搜索能力。服务端统一配置时，用户无需提供自己的 Key。
 
-## 如何开始
+## 安装步骤
 
-安装完整 Skill 需要宿主支持技能加载。仅当使用本地排盘脚本时需要 Python 3.9+；实时岗位搜索需要宿主支持联网浏览。没有联网能力时只输出搜索计划，不能验证在招。
+以下终端命令适用于 macOS / Linux。也可以在仓库首页点 **Code → Download ZIP**，解压后找到 `skills/bazi-career`。
 
-1. 下载或克隆本仓库。
-2. 若需要本地排盘，在仓库根目录运行：
+### 1. 下载并确认文件夹
+
+```bash
+git clone https://github.com/celinethecreator/bazi-career-skill.git
+cd bazi-career-skill
+ls skills/bazi-career
+```
+
+看到 `SKILL.md`、`references` 和 `scripts` 后，按你使用的工具选一种安装方式。
+
+### 2. 安装到你的工具
+
+**Codex（本机个人技能）**
+
+```bash
+mkdir -p ~/.agents/skills
+cp -R skills/bazi-career ~/.agents/skills/
+```
+
+打开新的本机 Codex 对话，输入 `$bazi-career`。项目级安装可把同一个文件夹复制到目标项目的 `.agents/skills/`。[Codex 官方说明](https://learn.chatgpt.com/docs/build-skills)
+
+**Claude Code（本机个人技能）**
+
+```bash
+mkdir -p ~/.claude/skills
+cp -R skills/bazi-career ~/.claude/skills/
+```
+
+在 Claude Code 输入 `/bazi-career`。项目级安装可把同一个文件夹复制到目标项目的 `.claude/skills/`。[Claude Code 官方说明](https://code.claude.com/docs/en/skills)
+
+**其他工具**：有 Skill 导入功能时，选择整个 `skills/bazi-career` 文件夹。普通聊天可上传 `SKILL.md` 和 `references/` 下的文件，请助手按文件里的流程试用。
+
+### 3. 第一次使用
+
+> 使用职途八字。我目前做市场运营，想转型但不知道投哪些岗位。请先问我必要的信息，再结合我的八字和工作经历梳理方向。
+
+已有四柱可以直接输入。宿主支持读图时，也可以上传排盘截图。实时岗位搜索需要宿主具备联网能力。
+
+### 4. 可选：本地排盘依赖
+
+只有需要按出生资料运行本地排盘脚本时，才需要 Python 3.9+。在下载后的仓库根目录运行：
 
 ```bash
 python3 -m venv .venv
-# macOS / Linux
 . .venv/bin/activate
-# Windows PowerShell 用 .venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 ```
 
-3. 将 `skills/bazi-career` 整个文件夹复制到助手支持的 Skill 目录。Claude Code 项目目录为 `.claude/skills/bazi-career`；其他助手请使用其导入功能。运行脚本时让助手使用上述虚拟环境解释器；脚本路径相对于安装后的 Skill 目录。
-4. 输入：
-
-> 使用 $bazi-career。我目前做市场运营，想转型但不知道投哪些岗位。请先问我必要信息，我的八字会以四柱或排盘截图提供，请先确认，再结合解读与真实经历，联网找适合的方向和岗位。
-
-本 Skill 首轮收集三组输入：职业背景、职业卡点、自己的八字（年/月/日/时四柱或排盘截图）。没有现成命盘时才走出生信息辅助排盘入口。确认命盘后，依次进行八字解读、职业方向探索、岗位搜索与行动规划。不要公开提交自己的出生信息、简历或Offer文件。
+Windows PowerShell 可用 `py -m venv .venv`，再执行 `.\.venv\Scripts\Activate.ps1` 和 `python -m pip install -r requirements.txt`。运行排盘时，请助手使用该虚拟环境的 Python。
 
 ### 咨询第一步：职业背景、卡点与八字
 
