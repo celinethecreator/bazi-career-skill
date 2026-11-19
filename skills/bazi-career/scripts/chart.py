@@ -24,14 +24,14 @@ def calculate(data):
     if data.get('true_solar_time'):
         raise ValueError('True solar time is not implemented; do not silently approximate')
     exact = data.get('time')
-    if exact and ('time_start' in data or 'time_end' in data):
+    if exact is not None and ('time_start' in data or 'time_end' in data):
         raise ValueError('Choose exact time OR a range')
     if ('time_start' in data) != ('time_end' in data):
         raise ValueError('Both time_start and time_end are required')
     def parse_time(value):
         t = datetime.strptime(value, '%H:%M')
         return day.replace(hour=t.hour, minute=t.minute)
-    if exact:
+    if exact is not None:
         start = end = parse_time(exact)
     elif 'time_start' in data:
         start, end = parse_time(data['time_start']), parse_time(data['time_end'])
@@ -63,7 +63,7 @@ def calculate(data):
     return {'engine':'lunar-python','version':version('lunar-python'),
             'calendar':'solar','timezone':'Asia/Shanghai','sect':sect,
             'time_basis':'civil time; no true-solar correction; minute precision',
-            'precision':'exact-minute' if exact else 'candidate-range',
+            'precision':'exact-minute' if exact is not None else 'candidate-range',
             'candidate_count':len(values),'invariant_pillars':invariant,
             'candidates':values,
             'limits':['Calendar output is not evidence of career prediction accuracy',
