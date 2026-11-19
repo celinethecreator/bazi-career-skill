@@ -6,6 +6,8 @@ ALLOWED = {'roles','cities','skills','scenario','graduation_year'}
 SCENARIOS = {'campus','experienced','plateau','offer','transition'}
 
 def plan(data):
+    if not isinstance(data, dict):
+        raise ValueError('Input must be a JSON object')
     if set(data) - ALLOWED:
         raise ValueError('Only non-sensitive search fields are accepted')
     for key in ('roles','cities','skills'):
